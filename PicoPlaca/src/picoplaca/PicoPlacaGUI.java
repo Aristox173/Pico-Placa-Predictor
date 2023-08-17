@@ -131,6 +131,7 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         jPanel6.add(cbDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
         timePicker1.setForeground(new java.awt.Color(0, 102, 102));
+        timePicker1.set24hourMode(true);
         jPanel6.add(timePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
@@ -190,7 +191,11 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
             //Create LicensePlate object
             LicensePlate licensePlate = new LicensePlate(plateValue);
             
-            JOptionPane.showMessageDialog(rootPane, licensePlate.getDayRestriction(cbDay.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(rootPane, licensePlate.getHourRestriction(timePicker1.getSelectedTime()));
+            
+            //Show results
+            //JOptionPane.showMessageDialog(rootPane, licensePlate.getResults(cbDay.getSelectedItem().toString()));
+            
             
             
         } 

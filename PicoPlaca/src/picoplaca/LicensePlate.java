@@ -1,11 +1,17 @@
 package picoplaca;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Juan Aristizábal
  */
-
 public class LicensePlate {
+
     //Attributes
     private String licensePlateNumber;
 
@@ -23,17 +29,18 @@ public class LicensePlate {
     public String getLicensePlateNumber() {
         return licensePlateNumber;
     }
-    
+
     //Method to get the last digit of the license plate
-    public int getLastDigit(){
+    public int getLastDigit() {
         return Character.getNumericValue(licensePlateNumber.charAt(licensePlateNumber.length() - 1));
     }
-    
-    public boolean getDayRestriction(String day){
-        
+
+    //Method for determining whether a vehicle with a certain license plate is allowed on the road based on the day
+    public boolean getDayRestriction(String day) {
+
         //Get the last digit of the license plate
         int lastDigit = getLastDigit();
-        
+
         switch (day) {
             case "Monday":
                 // If the last digit of the license plate is not 1 and not 2,
@@ -58,5 +65,60 @@ public class LicensePlate {
             default:
                 return true;
         }
+    }
+
+    // Method for determining whether a vehicle with a certain license plate is allowed on the road based on the hour of the day
+    public boolean getHourRestriction(String hour) {
+        try {
+            // Extract the time part (hours and minutes) from the input hour
+            String time = hour.substring(0, hour.length() - 3);
+
+            // Define the start and end times for the first time range
+            String startTime1 = "07:00";
+            String endTime1 = "09:30";
+
+            // Define the start and end times for the second time range
+            String startTime2 = "16:00";
+            String endTime2 = "19:30";
+
+            // Create a SimpleDateFormat object to parse time strings
+            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+
+            // Parse the input time string into a Date object
+            Date t = sdf.parse(time);
+
+            // Parse the start and end times for the first range into Date objects
+            Date s1 = sdf.parse(startTime1);
+            Date e1 = sdf.parse(endTime1);
+
+            // Parse the start and end times for the second range into Date objects
+            Date s2 = sdf.parse(startTime2);
+            Date e2 = sdf.parse(endTime2);
+
+            // Check if the input time falls within the first time range
+            if (t.compareTo(s1) >= 0 && t.compareTo(e1) <= 0) {
+                return true; // The vehicle is not allowed on the road
+            }
+
+            // Check if the input time falls within the second time range
+            if (t.compareTo(s2) >= 0 && t.compareTo(e2) <= 0) {
+                return true; // The vehicle is not allowed on the road
+            }
+
+        } catch (ParseException ex) {
+            Logger.getLogger(LicensePlate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false; // The vehicle is allowed on the road during the specified hours
+    }
+
+    public String getResults(String day) {
+
+        if (getDayRestriction(day)) {
+            return "You can be on the road with no problem!";
+        } else {
+
+        }
+        return null;
     }
 }
