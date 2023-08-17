@@ -24,4 +24,9 @@ public class LicensePlate {
         return licensePlateNumber;
     }
     
+    //Method to get the last digit of the license plate
+    public char getLastDigit(){
+        return licensePlateNumber.charAt(licensePlateNumber.length() - 1);
+    }
+    
 }

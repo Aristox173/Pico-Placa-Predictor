@@ -1,5 +1,7 @@
 package picoplaca;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Juan Aristizábal
@@ -33,8 +35,8 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        placaLetras = new javax.swing.JTextField();
-        placaDigitos = new javax.swing.JTextField();
+        plateL = new javax.swing.JTextField();
+        plateN = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         timePicker1 = new com.raven.swing.TimePicker();
         jButton1 = new javax.swing.JButton();
@@ -100,11 +102,21 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         jLabel5.setText("Enter the License Plate Number:");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        placaLetras.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jPanel6.add(placaLetras, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 60, -1));
+        plateL.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        plateL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                plateLKeyPressed(evt);
+            }
+        });
+        jPanel6.add(plateL, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 60, -1));
 
-        placaDigitos.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jPanel6.add(placaDigitos, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 60, -1));
+        plateN.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        plateN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                plateNKeyPressed(evt);
+            }
+        });
+        jPanel6.add(plateN, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 60, -1));
 
         jComboBox1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
@@ -117,6 +129,11 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("PREDICT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 440, -1, -1));
 
         jTabbedPane1.addTab("tab2", jPanel6);
@@ -141,6 +158,75 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        //Check that the text fields are not empty
+        if(plateL.getText().isBlank() || plateN.getText().isBlank()){
+            JOptionPane.showMessageDialog(rootPane, "Enter the license plate correctly, make sure that the text fields are not empty!");
+        }
+        //Check that the first text field has exactly three letters
+        else if(plateL.getText().length() != 3){
+            JOptionPane.showMessageDialog(rootPane, "Enter exactly three letters in the first text field!");
+        //Check that the second text field has at least three numbers
+        }else if(plateN.getText().length() < 3){
+            JOptionPane.showMessageDialog(rootPane, "Enter at least three numbers in the second text field");
+        }else{
+            //Join the two text fields together
+            String plateValue = plateL.getText() + "-" + plateN.getText();
+            //Create LicensePlate object
+            LicensePlate licensePlate = new LicensePlate(plateValue);
+        } 
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void plateLKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_plateLKeyPressed
+        
+        //Get the character from the event
+        char c = evt.getKeyChar();
+
+        //Check that the character is a letter or a control character
+        if (Character.isLetter(c) || Character.isISOControl(c)) {
+            plateL.setEditable(true);
+        } else {
+            plateL.setEditable(false);
+        }
+        
+        //Check that the text in the text field is equal to three characters
+        if (plateL.getText().length() == 3){
+            
+            //If the character is a control character, you can use it, if not, you can't insert more characters 
+            if(Character.isISOControl(c)){
+                plateL.setEditable(true);
+            }else{
+                plateL.setEditable(false);
+            }   
+        }
+        
+    }//GEN-LAST:event_plateLKeyPressed
+
+    private void plateNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_plateNKeyPressed
+        //Get the character from the event
+        char c = evt.getKeyChar();
+
+        //Check that the character is a digit or a control character
+        if (Character.isDigit(c) || Character.isISOControl(c)) {
+            plateN.setEditable(true);
+        } else {
+            plateN.setEditable(false);
+        }
+        
+        //Check that the text in the text field is equal to four characters
+        if (plateN.getText().length() == 4){
+            
+            //If the character is a control character, you can use it, if not, you can't insert more characters 
+            if(Character.isISOControl(c)){
+                plateN.setEditable(true);
+            }else{
+                plateN.setEditable(false);
+            }   
+        }
+    }//GEN-LAST:event_plateNKeyPressed
 
     /**
      * @param args the command line arguments
@@ -191,8 +277,8 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField placaDigitos;
-    private javax.swing.JTextField placaLetras;
+    private javax.swing.JTextField plateL;
+    private javax.swing.JTextField plateN;
     private com.raven.swing.TimePicker timePicker1;
     private com.raven.swing.TimePickerLabel timePickerLabel1;
     // End of variables declaration//GEN-END:variables
