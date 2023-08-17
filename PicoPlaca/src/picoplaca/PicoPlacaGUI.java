@@ -27,19 +27,21 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         timePickerLabel1 = new com.raven.swing.TimePickerLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         plateL = new javax.swing.JTextField();
         plateN = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbDay = new javax.swing.JComboBox<>();
         timePicker1 = new com.raven.swing.TimePicker();
         jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
 
         timePickerLabel1.setText("timePickerLabel1");
@@ -55,6 +57,17 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Predictor");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Pico y Placa");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
+
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 200));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 580));
@@ -76,11 +89,6 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Pico y Placa Predictor");
-        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -118,9 +126,9 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         });
         jPanel6.add(plateN, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, 60, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
-        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+        cbDay.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        cbDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
+        jPanel6.add(cbDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
         timePicker1.setForeground(new java.awt.Color(0, 102, 102));
         jPanel6.add(timePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
@@ -135,6 +143,11 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
             }
         });
         jPanel6.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 440, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Pico y Placa Predictor");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         jTabbedPane1.addTab("tab2", jPanel6);
 
@@ -176,6 +189,10 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
             String plateValue = plateL.getText() + "-" + plateN.getText();
             //Create LicensePlate object
             LicensePlate licensePlate = new LicensePlate(plateValue);
+            
+            JOptionPane.showMessageDialog(rootPane, licensePlate.getDayRestriction(cbDay.getSelectedItem().toString()));
+            
+            
         } 
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -264,13 +281,15 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbDay;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
