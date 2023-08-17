@@ -112,13 +112,15 @@ public class LicensePlate {
         return false; // The vehicle is allowed on the road during the specified hours
     }
 
-    public String getResults(String day) {
+    public String getResults(String day, String hour) {
 
         if (getDayRestriction(day)) {
             return "You can be on the road with no problem!";
-        } else {
-
+        } 
+        else if (getHourRestriction(hour)){
+            return "YOU CAN'T BE ON THE ROAD FOR THE TIME BEING!";
+        }else{
+            return "You can be on the road with no problem at the specified time, but be aware of the time ranges (07:00-09:30 and 16:00-19:30)!";
         }
-        return null;
     }
 }

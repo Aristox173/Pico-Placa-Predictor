@@ -29,8 +29,10 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -39,10 +41,9 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         plateL = new javax.swing.JTextField();
         plateN = new javax.swing.JTextField();
         cbDay = new javax.swing.JComboBox<>();
-        timePicker1 = new com.raven.swing.TimePicker();
+        timePicker = new com.raven.swing.TimePicker();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
 
         timePickerLabel1.setText("timePickerLabel1");
 
@@ -70,22 +71,33 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 200));
 
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(51, 51, 51));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Java based system that\nreturns whether or not\na car can be on the \nroad based in the last\ndigit of the license \nplate, the day of the \nweek, and the hour");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 250, 180));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 580));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 720, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab1", jPanel5);
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,9 +142,9 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         cbDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }));
         jPanel6.add(cbDay, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
-        timePicker1.setForeground(new java.awt.Color(0, 102, 102));
-        timePicker1.set24hourMode(true);
-        jPanel6.add(timePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
+        timePicker.setForeground(new java.awt.Color(0, 102, 102));
+        timePicker.set24hourMode(true);
+        jPanel6.add(timePicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
@@ -154,21 +166,6 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 720, 520));
 
-        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, -1, -1));
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -182,7 +179,7 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         //Check that the first text field has exactly three letters
         else if(plateL.getText().length() != 3){
             JOptionPane.showMessageDialog(rootPane, "Enter exactly three letters in the first text field!");
-        //Check that the second text field has at least three numbers
+            //Check that the second text field has at least three numbers
         }else if(plateN.getText().length() < 3){
             JOptionPane.showMessageDialog(rootPane, "Enter at least three numbers in the second text field");
         }else{
@@ -190,42 +187,12 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
             String plateValue = plateL.getText() + "-" + plateN.getText();
             //Create LicensePlate object
             LicensePlate licensePlate = new LicensePlate(plateValue);
-            
-            JOptionPane.showMessageDialog(rootPane, licensePlate.getHourRestriction(timePicker1.getSelectedTime()));
-            
+
             //Show results
-            //JOptionPane.showMessageDialog(rootPane, licensePlate.getResults(cbDay.getSelectedItem().toString()));
-            
-            
-            
-        } 
-        
+            JOptionPane.showMessageDialog(rootPane, licensePlate.getResults(cbDay.getSelectedItem().toString(), timePicker.getSelectedTime()));
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void plateLKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_plateLKeyPressed
-        
-        //Get the character from the event
-        char c = evt.getKeyChar();
-
-        //Check that the character is a letter or a control character
-        if (Character.isLetter(c) || Character.isISOControl(c)) {
-            plateL.setEditable(true);
-        } else {
-            plateL.setEditable(false);
-        }
-        
-        //Check that the text in the text field is equal to three characters
-        if (plateL.getText().length() == 3){
-            
-            //If the character is a control character, you can use it, if not, you can't insert more characters 
-            if(Character.isISOControl(c)){
-                plateL.setEditable(true);
-            }else{
-                plateL.setEditable(false);
-            }   
-        }
-        
-    }//GEN-LAST:event_plateLKeyPressed
 
     private void plateNKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_plateNKeyPressed
         //Get the character from the event
@@ -237,18 +204,43 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         } else {
             plateN.setEditable(false);
         }
-        
+
         //Check that the text in the text field is equal to four characters
         if (plateN.getText().length() == 4){
-            
-            //If the character is a control character, you can use it, if not, you can't insert more characters 
+
+            //If the character is a control character, you can use it, if not, you can't insert more characters
             if(Character.isISOControl(c)){
                 plateN.setEditable(true);
             }else{
                 plateN.setEditable(false);
-            }   
+            }
         }
     }//GEN-LAST:event_plateNKeyPressed
+
+    private void plateLKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_plateLKeyPressed
+
+        //Get the character from the event
+        char c = evt.getKeyChar();
+
+        //Check that the character is a letter or a control character
+        if (Character.isLetter(c) || Character.isISOControl(c)) {
+            plateL.setEditable(true);
+        } else {
+            plateL.setEditable(false);
+        }
+
+        //Check that the text in the text field is equal to three characters
+        if (plateL.getText().length() == 3){
+
+            //If the character is a control character, you can use it, if not, you can't insert more characters
+            if(Character.isISOControl(c)){
+                plateL.setEditable(true);
+            }else{
+                plateL.setEditable(false);
+            }
+        }
+
+    }//GEN-LAST:event_plateLKeyPressed
 
     /**
      * @param args the command line arguments
@@ -298,12 +290,13 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField plateL;
     private javax.swing.JTextField plateN;
-    private com.raven.swing.TimePicker timePicker1;
+    private com.raven.swing.TimePicker timePicker;
     private com.raven.swing.TimePickerLabel timePickerLabel1;
     // End of variables declaration//GEN-END:variables
 }
