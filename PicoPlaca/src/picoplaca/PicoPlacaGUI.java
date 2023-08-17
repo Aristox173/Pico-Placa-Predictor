@@ -173,16 +173,15 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         //Check that the text fields are not empty
-        if(plateL.getText().isBlank() || plateN.getText().isBlank()){
+        if (plateL.getText().isBlank() || plateN.getText().isBlank()) {
             JOptionPane.showMessageDialog(rootPane, "Enter the license plate correctly, make sure that the text fields are not empty!");
-        }
-        //Check that the first text field has exactly three letters
-        else if(plateL.getText().length() != 3){
+        } //Check that the first text field has exactly three letters
+        else if (plateL.getText().length() != 3) {
             JOptionPane.showMessageDialog(rootPane, "Enter exactly three letters in the first text field!");
             //Check that the second text field has at least three numbers
-        }else if(plateN.getText().length() < 3){
+        } else if (plateN.getText().length() < 3) {
             JOptionPane.showMessageDialog(rootPane, "Enter at least three numbers in the second text field");
-        }else{
+        } else {
             //Join the two text fields together
             String plateValue = plateL.getText() + "-" + plateN.getText();
             //Create LicensePlate object
@@ -206,12 +205,12 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         }
 
         //Check that the text in the text field is equal to four characters
-        if (plateN.getText().length() == 4){
+        if (plateN.getText().length() == 4) {
 
             //If the character is a control character, you can use it, if not, you can't insert more characters
-            if(Character.isISOControl(c)){
+            if (Character.isISOControl(c)) {
                 plateN.setEditable(true);
-            }else{
+            } else {
                 plateN.setEditable(false);
             }
         }
@@ -230,12 +229,12 @@ public class PicoPlacaGUI extends javax.swing.JFrame {
         }
 
         //Check that the text in the text field is equal to three characters
-        if (plateL.getText().length() == 3){
+        if (plateL.getText().length() == 3) {
 
             //If the character is a control character, you can use it, if not, you can't insert more characters
-            if(Character.isISOControl(c)){
+            if (Character.isISOControl(c)) {
                 plateL.setEditable(true);
-            }else{
+            } else {
                 plateL.setEditable(false);
             }
         }

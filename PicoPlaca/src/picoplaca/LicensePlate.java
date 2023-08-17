@@ -116,10 +116,9 @@ public class LicensePlate {
 
         if (getDayRestriction(day)) {
             return "You can be on the road with no problem!";
-        } 
-        else if (getHourRestriction(hour)){
+        } else if (getHourRestriction(hour)) {
             return "YOU CAN'T BE ON THE ROAD FOR THE TIME BEING!";
-        }else{
+        } else {
             return "You can be on the road with no problem at the specified time, but be aware of the time ranges (07:00-09:30 and 16:00-19:30)!";
         }
     }
